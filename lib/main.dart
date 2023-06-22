@@ -65,21 +65,28 @@ class MyHomePage extends StatelessWidget {
           children: [
             WordCard(pair: pair),
             SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                appState.generateNewRandomWord();
-              },
-              child: Text('Generate word'),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    appState.generateNewRandomWord();
+                  },
+                  child: Text('Generate word'),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton.icon(
+                    onPressed: () {
+                      appState.toggleFavorite();
+                    },
+                    icon: Icon(
+                        appState.isFavorite()
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: appState.isFavorite() ? Colors.red : null),
+                    label: Text('Like'))
+              ],
             ),
-            IconButton(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(
-                    appState.isFavorite()
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: appState.isFavorite() ? Colors.red : null))
           ],
         ),
       ),
