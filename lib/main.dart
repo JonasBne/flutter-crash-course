@@ -44,17 +44,21 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Random Word Generator'),
       ),
-      body: Column(
-        children: [
-          Text('Your random word is:'),
-          WordCard(pair: pair),
-          ElevatedButton(
-            onPressed: () {
-              appState.generateNewRandomWord();
-            },
-            child: Text('Generate word'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            WordCard(pair: pair),
+            SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                appState.generateNewRandomWord();
+              },
+              child: Text('Generate word'),
+            ),
+          ],
+        ),
       ),
     );
   }
