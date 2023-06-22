@@ -29,11 +29,23 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+  var favorites = List<WordPair>.empty(growable: true);
 
   void generateNewRandomWord() {
     current = WordPair.random();
     notifyListeners();
   }
+
+  void toggleFavorite() {
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners();
+  }
+
+  bool isFavorite() => favorites.contains(current);
 }
 
 class MyHomePage extends StatelessWidget {
@@ -59,6 +71,15 @@ class MyHomePage extends StatelessWidget {
               },
               child: Text('Generate word'),
             ),
+            IconButton(
+                onPressed: () {
+                  appState.toggleFavorite();
+                },
+                icon: Icon(
+                    appState.isFavorite()
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: appState.isFavorite() ? Colors.red : null))
           ],
         ),
       ),
